@@ -704,6 +704,7 @@ def get_YFin_data(
 
 def get_stock_news_openai(ticker, curr_date):
     config = get_config()
+    prompt_text = f"Can you search Social Media for {ticker} from 7 days before {curr_date} to {curr_date}? Make sure you only get the data posted during that period."
     if os.environ.get("OPENAI_API_KEY"):
         client = OpenAI(base_url=config["backend_url"])
 
@@ -715,7 +716,7 @@ def get_stock_news_openai(ticker, curr_date):
                     "content": [
                         {
                             "type": "input_text",
-                            "text": f"Can you search Social Media for {ticker} from 7 days before {curr_date} to {curr_date}? Make sure you only get the data posted during that period.",
+                            "text": prompt_text,
                         }
                     ],
                 }
@@ -743,7 +744,7 @@ def get_stock_news_openai(ticker, curr_date):
             messages=[
                 {
                     "role": "system",
-                    "content": f"Can you search Social Media for {ticker} from 7 days before {curr_date} to {curr_date}? Make sure you only get the data posted during that period."
+                    "content": prompt_text
                 }
             ],
             temperature=1,
@@ -759,6 +760,7 @@ def get_stock_news_openai(ticker, curr_date):
 
 def get_global_news_openai(curr_date):
     config = get_config()
+    prompt_text = f"Can you search global or macroeconomics news from 7 days before {curr_date} to {curr_date} that would be informative for trading purposes? Make sure you only get the data posted during that period."
     if os.environ.get("OPENAI_API_KEY"):
         client = OpenAI(base_url=config["backend_url"])
 
@@ -770,7 +772,7 @@ def get_global_news_openai(curr_date):
                     "content": [
                         {
                             "type": "input_text",
-                            "text": f"Can you search global or macroeconomics news from 7 days before {curr_date} to {curr_date} that would be informative for trading purposes? Make sure you only get the data posted during that period.",
+                            "text": prompt_text,
                         }
                     ],
                 }
@@ -798,7 +800,7 @@ def get_global_news_openai(curr_date):
             messages=[
                 {
                     "role": "system",
-                    "content": f"Can you search global or macroeconomics news from 7 days before {curr_date} to {curr_date} that would be informative for trading purposes? Make sure you only get the data posted during that period.",
+                    "content": prompt_text,
                 }
             ],
             temperature=1,
@@ -815,6 +817,7 @@ def get_global_news_openai(curr_date):
 
 def get_fundamentals_openai(ticker, curr_date):
     config = get_config()
+    prompt_text = f"Can you search Fundamental for discussions on {ticker} during of the month before {curr_date} to the month of {curr_date}. Make sure you only get the data posted during that period. List as a table, with PE/PS/Cash flow/ etc"
     if os.environ.get("OPENAI_API_KEY"):
         client = OpenAI(base_url=config["backend_url"])
 
@@ -826,7 +829,7 @@ def get_fundamentals_openai(ticker, curr_date):
                     "content": [
                         {
                             "type": "input_text",
-                            "text": f"Can you search Fundamental for discussions on {ticker} during of the month before {curr_date} to the month of {curr_date}. Make sure you only get the data posted during that period. List as a table, with PE/PS/Cash flow/ etc",
+                            "text": prompt_text,
                         }
                     ],
                 }
@@ -854,7 +857,7 @@ def get_fundamentals_openai(ticker, curr_date):
             messages=[
                 {
                     "role": "system",
-                    "content": f"Can you search Fundamental for discussions on {ticker} during of the month before {curr_date} to the month of {curr_date}. Make sure you only get the data posted during that period. List as a table, with PE/PS/Cash flow/ etc",
+                    "content": prompt_text,
                 }
             ],
             temperature=1,
